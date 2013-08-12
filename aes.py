@@ -15,13 +15,16 @@ Performance Measurement
   10 loops, best of 3: 29.5 msec per loop
 '''
 
-import os, sys, math, struct, random
+import logging, math, os, random, struct, sys
 
 OFB, CFB, CBC = 0, 1, 2 # mode of operation
 SIZE_128, SIZE_192, SIZE_256 = 16, 24, 32
 
+logger = logging.getLogger(__name__)
+
 iv_null   = lambda: [0 for i in xrange(16)]
 iv_random = lambda: [ord(random.randint(0, 255)) for i in xrange(16)]
+
 
 def encrypt(key, data, iv, mode=CBC):
     key, keysize = map(ord, key), len(key)
@@ -203,13 +206,13 @@ def _decrypt(cipherIn, originalsize, mode, key, size, IV):
 
 def _test(debug=False, mode=CBC, dataSize=1000, keySize=16, repeat=100):
     cleartext = ''.join([chr(random.randint(0, 255)) for i in xrange(dataSize)])
-    if debug: print 'cleartext=%r'%(cleartext,)
+    logging.debug('cleartext=%r', cleartext)
     for i in xrange(repeat):
         cypherkey, iv = [random.randint(1,255) for i in xrange(keySize)], [0 for i in xrange(keySize)]
         mode1, orig_len, ciph = _encrypt(cleartext, mode, cypherkey, keySize, iv)
-        if debug: print 'mode=%s, original length=%s (%s)\nencrypted=%s'%(mode, orig_len, len(cleartext), ciph)
+        logging.debug('mode=%s, original length=%s (%s)\nencrypted=%s', mode, orig_len, len(cleartext), ciph)
         decr = _decrypt(ciph, orig_len, mode1, cypherkey, keySize, iv)
-        if debug: print 'decrypted=%r'%(decr,)
+        logging.debug('decrypted=%r', decr)
         assert decr == cleartext
 
 def _test2():
