@@ -61,10 +61,10 @@ throw an exception and display the error message.
 
 '''
 
-import logger, os, sys, time, struct, socket, traceback, multitask, amf, hashlib, hmac, random
+import logging, os, sys, time, struct, socket, traceback, multitask, amf, hashlib, hmac, random
 
 _debug = False
-logger = logger.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 class ConnectionClosed:
     'raised when the client closed the connection'

@@ -427,10 +427,10 @@ Fill in description of the remaining message flows beyond handshake.
 Describe the man-in-middle mode that enables audio/video flowing through the server.
 '''
 
-import logger, os, sys, traceback, urlparse, re, socket, struct, time, random, hmac, hashlib
+import logging, os, sys, traceback, urlparse, re, socket, struct, time, random, hmac, hashlib
 import multitask, amf, rtmp
 
-logger = logger.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 try:
     from Crypto.Cipher import AES

@@ -15,12 +15,12 @@ Performance Measurement
   10 loops, best of 3: 29.5 msec per loop
 '''
 
-import logger, math, os, random, struct, sys
+import logging, math, os, random, struct, sys
 
 OFB, CFB, CBC = 0, 1, 2 # mode of operation
 SIZE_128, SIZE_192, SIZE_256 = 16, 24, 32
 
-logger = logger.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 iv_null   = lambda: [0 for i in xrange(16)]
 iv_random = lambda: [ord(random.randint(0, 255)) for i in xrange(16)]
