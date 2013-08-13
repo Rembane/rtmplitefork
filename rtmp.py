@@ -499,7 +499,7 @@ class Protocol(object):
 
     def parseMessage(self, msg):
         try:            
-            logger.debug('Protocol.parseMessage msg=', msg            )
+            logger.debug('Protocol.parseMessage msg=%s', msg)
             if msg.header.channel == Protocol.PROTOCOL_CHANNEL_ID:
                 yield self.protocolMessage(msg)
             else: 
